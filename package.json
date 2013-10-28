@@ -1,0 +1,18 @@
+{
+  "name": "hk-aerial-node-commander",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CyborgUnicorn/hk-aerial-node-commander"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/CyborgUnicorn/hk-aerial-node-commander/issues"
+  }
+}
