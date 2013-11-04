@@ -14,5 +14,8 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/CyborgUnicorn/hk-aerial-node-commander/issues"
+  },
+  "dependencies": {
+    "serialport": "~1.2.3"
   }
 }
