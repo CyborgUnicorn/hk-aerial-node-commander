@@ -19,7 +19,8 @@ Wii.prototype.connect = function(callback) {
 
   serialport.list(function (err, ports) {
     ports.forEach(function(port) {
-      if(manufacturer === port.manufacturer) {
+      console.log(port);
+      if(manufacturer === port.manufacturer || port.pnpId.indexOf('Arduino') > -1) {
         self.port = new SerialPort(port.comName, {
           baudrate: 115200,
           databits: 8,
@@ -42,14 +43,16 @@ Wii.prototype.connect = function(callback) {
 
 Wii.prototype.send = function(msg, success, fail) {
   var arr = [0x24, 0x4D, 0x3C];
-  arr.push(msg.length);
+  arr.push(msg.length + 5);
   arr = arr.concat(msg);
   var checksum = arr.slice(3).reduce(function(tot, cur) { return tot ^ cur; }, 0);
   arr.push(checksum);
 
-  arr.push(13);
-  arr.push(37);
+//  arr.push(13);
+//  arr.push(37);
   // yeah... cram it in there!
+
+  console.log('sending', arr.map(function(v) { return v.toString(16); }).join(', '));
 
   var port = this.port;
 
