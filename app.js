@@ -6,7 +6,12 @@ var serialport = require('serialport')
 var Wii = require('./src/wii').Wii;
 var wii = new Wii();
 wii.connect(function() {
-  setInterval(send, 500);
+  //setInterval(send, 500);
+  wii.sendRcValues(1500, 1500, 2000, 900, function() {
+    wii.readRcValues();
+
+    wii.readAtomicServo();
+  });
 });
 
 var times = 0;
