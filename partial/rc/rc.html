@@ -1,0 +1,20 @@
+<div ng-controller="RcCtrl">
+  <form>
+    Roll: <input type="range" min="1020" max="2000" ng-model="roll" />
+    <button ng-click="roll=1510">CENTER</button>
+    <br />
+    Pitch: <input type="range" min="1020" max="2000" ng-model="pitch" />
+    <button ng-click="pitch=1510">CENTER</button>
+    <br />
+    Yaw: <input type="range" min="1020" max="2000" ng-model="yaw" />
+    <br />
+    Throttle: <input type="range" min="1150" max="1850" ng-model="throttle" />
+    <input type="checkbox" ng-model="throttleOn" />
+    <br />
+    Aux1: <input type="range" min="1006" max="2006" ng-model="aux1" />
+    <button ng-click="aux1=1503">CENTER</button>
+    <br />
+    Aux2: <input type="range" min="1006" max="2006" ng-model="aux2" />
+    <button ng-click="aux2=1503">CENTER</button>
+  </form>
+</div>

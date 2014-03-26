@@ -1,19 +1,16 @@
 {
-  "name": "hk-aerial-node-commander",
+  "name": "hk-aerial-commander",
   "version": "0.0.0",
-  "homepage": "https://github.com/CyborgUnicorn/hk-aerial-node-commander",
-  "authors": [
-    "Johan Öbrink <johan.obrink@gmail.com>"
-  ],
-  "license": "MIT",
+  "main": "index.html",
   "ignore": [
     "**/.*",
     "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+    "bower_components"
   ],
   "dependencies": {
-    "angular": "~1.2.11"
+    "angular": "^1.2.0",
+    "angular-mocks": "^1.2.0",
+    "less": "^1.7.0",
+    "moment": "^2.5.1"
   }
 }
