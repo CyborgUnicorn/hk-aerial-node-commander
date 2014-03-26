@@ -18,12 +18,12 @@ angular.module('hk-aerial-node-commander').controller('DebugCtrl', function($sco
 
 angular.module('hk-aerial-node-commander').controller('RcCtrl', function($scope, socket, $timeout) {
 
-  $scope.roll = 1020 + (2000 - 1020) / 2;
-  $scope.pitch = 1020 + (2000 - 1020) / 2;
-  $scope.yaw = 1020 + (2000 - 1020) / 2;
+  $scope.roll = 1510;
+  $scope.pitch = 1510;
+  $scope.yaw = 1510;
   $scope.throttle = 1150;
-  $scope.aux1 = 1502;
-  $scope.aux2 = 1502;
+  $scope.aux1 = 1503;
+  $scope.aux2 = 1503;
   $scope.throttleOn = true;
 
   $scope.send = function() {
