@@ -1,4 +1,4 @@
-var toByte = require('../../server/src/toByte').toByte
+var toByte = require('../../lib/toByte').toByte
   , chai = require('chai')
   , expect = chai.expect;
 

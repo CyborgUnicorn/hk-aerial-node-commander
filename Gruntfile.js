@@ -13,7 +13,7 @@ module.exports = function (grunt) {
         options: {
           port: 9001,
           middleware: function(connect, options) {
-            return [folderMount(connect, options.base)]
+            return [folderMount(connect, options.base[0])]
           }
         }
       }
@@ -22,20 +22,30 @@ module.exports = function (grunt) {
       options: {
           livereload: true
       },
-      server: {
-        files: ['js/**/*','css/**/*','img/**/*','partial/**/*','service/**/*','filter/**/*','directive/**/*','index.html'],
+      connect: {
+        files: ['css/**/*','img/**/*','partial/**/*','directive/**/*','index.html'],
         tasks: []
       },
-      test: {
+      clienttest: {
         files: ['js/**/*','partial/**/*.js','service/**/*.js','filter/**/*.js','directive/**/*.js','index.html','test/unit/**/*'],
-        tasks: ['test']
+        tasks: ['clienttest']
+      },
+      servertest: {
+        files: ['server.js', 'lib/**/*.js', 'test/server/**/*'],
+        tasks: ['servertest']
       }
     },
     jshint: {
       options: {
-        jshintrc: '.jshintrc'
+        jshintrc: '.jshintrc',
+        reporter: require('jshint-stylish')
       },
-      files: ['js/**/*.js','partial/**/*.js','service/**/*.js','filter/**/*.js','directive/**/*.js']
+      client: {
+        src: ['js/**/*.js','partial/**/*.js','service/**/*.js','filter/**/*.js','directive/**/*.js']
+      },
+      server: {
+        src: ['server.js', 'lib/**/*.js']
+      }
     },
     clean: {
       before:{
@@ -162,6 +172,14 @@ module.exports = function (grunt) {
           run: true
         }
       }
+    },
+    mochaTest: {
+      options: {
+        reporter: 'Spec'
+      },
+      test: {
+        src: ['test/server/**/*.js']
+      }
     }
   });
 
@@ -180,9 +198,12 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-ngmin');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-mocha');
+  grunt.loadNpmTasks('grunt-mocha-test');
 
   grunt.registerTask('build',['clean:before','less','dom_munger:readcss','dom_munger:readscripts','ngtemplates','cssmin','concat','ngmin','uglify','copy','dom_munger:removecss','dom_munger:addcss','dom_munger:removescripts','dom_munger:addscript','htmlmin','imagemin','clean:after']);
-  grunt.registerTask('test',['jshint', 'mocha']);
+  grunt.registerTask('clienttest',['jshint:client', 'mocha']);
+  grunt.registerTask('servertest',['jshint:server', 'mochaTest']);
+  grunt.registerTask('test',['servertest', 'clienttest']);
   grunt.registerTask('server', ['connect']);
   grunt.registerTask('default', ['test', 'server', 'watch']);
 };
