@@ -37,13 +37,18 @@ module.exports = function (grunt) {
     },
     jshint: {
       options: {
-        jshintrc: '.jshintrc',
         reporter: require('jshint-stylish')
       },
       client: {
+        options: {
+          jshintrc: '.jshintrc-client'
+        },
         src: ['js/**/*.js','partial/**/*.js','service/**/*.js','filter/**/*.js','directive/**/*.js']
       },
       server: {
+        options: {
+          jshintrc: '.jshintrc-node'
+        },
         src: ['server.js', 'lib/**/*.js']
       }
     },
@@ -205,5 +210,5 @@ module.exports = function (grunt) {
   grunt.registerTask('servertest',['jshint:server', 'mochaTest']);
   grunt.registerTask('test',['servertest', 'clienttest']);
   grunt.registerTask('server', ['connect']);
-  grunt.registerTask('default', ['test', 'server', 'watch']);
+  grunt.registerTask('default', ['test', /*'server',*/ 'watch']);
 };

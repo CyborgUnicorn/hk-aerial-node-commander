@@ -1,13 +1,21 @@
 <div ng-controller="DebugCtrl">
   <pre>
-    Pitch: {{pitch}}
-    Roll: {{roll}}
-    Yaw: {{yaw}}
-    Throttle: {{throttle}}
-    Aux1: {{aux1}}
-    Aux1: {{aux2}}
-    Aux1: {{aux3}}
-    Aux1: {{aux4}}
+    Pitch: {{rc.pitch}}
+    Roll: {{rc.roll}}
+    Yaw: {{rc.yaw}}
+    Throttle: {{rc.throttle}}
+    Aux1: {{rc.aux1}}
+    Aux1: {{rc.aux2}}
+    Aux1: {{rc.aux3}}
+    Aux1: {{rc.aux4}}
+    Motor: {{motor}}
+    Servo: {{servo[5]}}
+    Angles: {{attitude.angles[0]}} {{attitude.angles[1]}}
+    Heading: {{attitude.heading}}
+    HeadFreeModeHold: {{attitude.headFreeModeHold}}
+    AccSmooth: {{rawImu.accSmooth}}
+    GyroData: {{rawImu.gyroData}}
+    MagADC: {{rawImu.magADC}}
   </pre>
   <pre>
     Atomic: {{atomic}}

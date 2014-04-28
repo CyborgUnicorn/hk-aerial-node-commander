@@ -16,7 +16,7 @@
     "url": "https://github.com/CyborgUnicorn/hk-aerial-node-commander/issues"
   },
   "dependencies": {
-    "serialport": "~1.2.3",
+    "multiwii": "~0.0.8",
     "socket.io": "~0.9.16",
     "connect": "~2.12.0"
   },

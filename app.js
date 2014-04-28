@@ -1,9 +1,8 @@
-var serialport = require('serialport')
-  , SerialPort = serialport.SerialPort
-  , sys = require('util')
-  , port;
+var multiwii = require('multiwii'),
+  Wii = multiwii.Wii,
+  sys = require('util'),
+  port;
 
-var Wii = require('./src/wii').Wii;
 var wii = new Wii();
 wii.connect(function() {
   //setInterval(send, 500);

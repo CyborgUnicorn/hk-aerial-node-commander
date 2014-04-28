@@ -1,0 +1,6 @@
+<div ng-controller="ConnectCtrl">
+  <button class="btn" ng-click="getList()">Get list</button>
+  <select ng-model="device" ng-options="d.comName for d in devices"></select>
+  <button class="btn" ng-click="connect()">Connect</button>
+  <button class="btn" ng-click="calibrate()">Calibrate</button>
+</div>

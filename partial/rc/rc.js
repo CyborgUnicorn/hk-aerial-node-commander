@@ -10,7 +10,7 @@ angular.module('hk-aerial-commander').controller('RcCtrl', function ($scope, soc
   $scope.throttleOn = true;
 
   $scope.send = function() {
-    socket.emit('send.rc', [
+    socket.emit('setRawRc',
       $scope.roll,
       $scope.pitch,
       $scope.yaw,
@@ -19,10 +19,10 @@ angular.module('hk-aerial-commander').controller('RcCtrl', function ($scope, soc
       $scope.aux2,
       0,
       0
-    ]);
-
-    $timeout($scope.send, 200);
+    );
   };
 
-  $scope.send();
+  setInterval($scope.send, 1000);
+
+  //$scope.send();
 });
