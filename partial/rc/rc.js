@@ -4,7 +4,7 @@ angular.module('hk-aerial-commander').controller('RcCtrl', function ($scope, soc
   $scope.roll = 1510;
   $scope.pitch = 1510;
   $scope.yaw = 1510;
-  $scope.throttle = 1150;
+  $scope.throttle = 1000;
   $scope.aux1 = 1503;
   $scope.aux2 = 1503;
   $scope.throttleOn = true;

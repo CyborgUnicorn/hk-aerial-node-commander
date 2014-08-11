@@ -2,7 +2,8 @@ var connect = require('connect'),
   http = require('http'),
   multiwii = require('multiwii'),
   Wii = multiwii.Wii,
-  socketlistener = require('./lib/socketlistener');
+  socketlistener = require('./lib/socketlistener'),
+  dualShockListener = require('./lib/dualShockListener');
 
 var app = connect()
   .use(connect.static(__dirname))
@@ -14,6 +15,10 @@ var io = require('socket.io').listen(server);
 var sockets = [];
 
 var wii = new Wii();
+
+var DualShock = require('./lib/dualShockListener').DualShock;
+var controller = new DualShock();
+controller.connect(wii);
 
 io.sockets.on('connection', function (socket) {
   if(sockets.indexOf(socket) === -1) {
