@@ -9,6 +9,15 @@ angular.module('hk-aerial-commander').controller('RcCtrl', function ($scope, soc
   $scope.aux2 = 1503;
   $scope.throttleOn = true;
 
+  $scope.front = 1150;
+  $scope.right = 1150;
+  $scope.left = 1150;
+
+  $scope.setRawMotor = function () {
+    console.log('setRawMotor', $scope.front, $scope.right, $scope.left);
+    socket.emit('setRawMotor', $scope.front, $scope.right, $scope.left);
+  }
+
   $scope.send = function() {
     socket.emit('setRawRc',
       $scope.roll,
@@ -22,7 +31,7 @@ angular.module('hk-aerial-commander').controller('RcCtrl', function ($scope, soc
     );
   };
 
-  setInterval($scope.send, 1000);
+  //setInterval($scope.send, 1000);
 
   //$scope.send();
 });

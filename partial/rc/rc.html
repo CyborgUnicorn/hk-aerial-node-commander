@@ -1,5 +1,10 @@
 <div ng-controller="RcCtrl">
   <form>
+    Front: <input type="number" min="1150" max="1850" ng-model="front" />
+    Right: <input type="number" min="1150" max="1850" ng-model="right" />
+    Left: <input type="number" min="1150" max="1850" ng-model="left" />
+    <button ng-click="setRawMotor()">SEND</button>
+    <br /><br />
     Roll: <input type="range" min="1020" max="2000" ng-model="roll" />
     <button ng-click="roll=1510">CENTER</button>
     <br />
