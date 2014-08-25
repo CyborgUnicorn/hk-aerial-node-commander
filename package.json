@@ -18,7 +18,7 @@
   "dependencies": {
     "connect": "~2.12.0",
     "dualshock-controller": "^0.6.7",
-    "multiwii": "~0.0.8",
+    "multiwii": "~0.0.9",
     "socket.io": "~0.9.16"
   },
   "devDependencies": {

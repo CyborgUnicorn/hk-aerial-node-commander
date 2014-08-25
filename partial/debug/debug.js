@@ -11,6 +11,11 @@ angular.module('hk-aerial-commander').controller('DebugCtrl', function ($scope, 
     $scope.safeApply();
   });
 
+  socket.on('motor-computed', function (data) {
+    $scope.motorComputed = data;
+    $scope.safeApply();
+  });
+
   socket.on('servo', function (data) {
     $scope.servo = data;
     $scope.safeApply();

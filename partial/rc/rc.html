@@ -1,25 +1,25 @@
 <div ng-controller="RcCtrl">
   <form>
-    Front: <input type="number" min="1150" max="1850" ng-model="front" />
-    Right: <input type="number" min="1150" max="1850" ng-model="right" />
-    Left: <input type="number" min="1150" max="1850" ng-model="left" />
+    Front: <input type="number" min="1020" max="2000" ng-model="front" />
+    Right: <input type="number" min="1020" max="2000" ng-model="right" />
+    Left: <input type="number" min="1020" max="2000" ng-model="left" />
     <button ng-click="setRawMotor()">SEND</button>
     <br /><br />
-    Roll: <input type="range" min="1020" max="2000" ng-model="roll" />
-    <button ng-click="roll=1510">CENTER</button>
+    Roll: <input type="number" min="1020" max="2000" ng-model="roll" />
+    <button ng-click="roll=1494">CENTER</button>
     <br />
-    Pitch: <input type="range" min="1020" max="2000" ng-model="pitch" />
-    <button ng-click="pitch=1510">CENTER</button>
+    Pitch: <input type="number" min="1020" max="2000" ng-model="pitch" />
+    <button ng-click="pitch=1500">CENTER</button>
     <br />
-    Yaw: <input type="range" min="1020" max="2000" ng-model="yaw" />
+    Yaw: <input type="number" min="1020" max="2000" ng-model="yaw" />
     <br />
-    Throttle: <input type="range" min="1000" max="2000" ng-model="throttle" />
+    Throttle: <input type="number" min="1150" max="1850" step="50" ng-model="throttle" />
     <input type="checkbox" ng-model="throttleOn" />
     <br />
-    Aux1: <input type="range" min="1006" max="2006" ng-model="aux1" />
-    <button ng-click="aux1=1503">CENTER</button>
+    Aux1: <input type="number" min="1006" max="2006" ng-model="aux1" />
+    <button ng-click="aux1=1500">CENTER</button>
     <br />
-    Aux2: <input type="range" min="1006" max="2006" ng-model="aux2" />
-    <button ng-click="aux2=1503">CENTER</button>
+    Aux2: <input type="number" min="1006" max="2006" ng-model="aux2" />
+    <button ng-click="aux2=1500">CENTER</button>
   </form>
 </div>
