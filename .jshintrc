@@ -10,6 +10,7 @@
   "boss": true,
   "eqnull": true,
   "browser": true,
+  "node": true,
   "smarttabs": true,
   "globals": {
     "angular": true,
@@ -17,6 +18,17 @@
     "$": true,
     "_": true,
     "moment": true,
-    "io": true
+    "io": true,
+
+    "describe": true,
+    "xdescribe": true,
+    "before": true,
+    "beforeEach": true,
+    "after": true,
+    "afterEach": true,
+    "it": true,
+    "xit": true,
+    "sinon": true,
+    "expect": true
   }
 }

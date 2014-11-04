@@ -1,6 +1,6 @@
-var toByte = require('../../lib/toByte').toByte
-  , chai = require('chai')
-  , expect = chai.expect;
+var toByte = require('../../lib/toByte').toByte,
+  chai = require('chai'),
+  expect = chai.expect;
 
 describe('toByte', function () {
   it('converts < 255', function () {
