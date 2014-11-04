@@ -16,9 +16,9 @@ var sockets = [];
 
 var wii = new Wii();
 
-/*var DualShock = require('./lib/dualShockListener').DualShock;
+var DualShock = require('./lib/dualShockListener').DualShock;
 var controller = new DualShock();
-controller.connect(wii);*/
+controller.connect(wii);
 
 io.sockets.on('connection', function (socket) {
   if(sockets.indexOf(socket) === -1) {

@@ -1,4 +1,4 @@
-<div ng-controller="DebugCtrl">
+<div class="debug" ng-controller="DebugCtrl">
   <pre>
     Pitch: {{rc.pitch}}
     Roll: {{rc.roll}}
@@ -21,4 +21,52 @@
   <pre>
     Atomic: {{atomic}}
   </pre>
+  <div class="well">
+    roll:
+      P <input type="number" ng-model="pid.roll.p" />
+      I <input type="number" ng-model="pid.roll.i" />
+      D <input type="number" ng-model="pid.roll.d" />
+    <br />
+    pitch:
+      P <input type="number" ng-model="pid.pitch.p" />
+      I <input type="number" ng-model="pid.pitch.i" />
+      D <input type="number" ng-model="pid.pitch.d" />
+    <br />
+    yaw:
+      P <input type="number" ng-model="pid.yaw.p" />
+      I <input type="number" ng-model="pid.yaw.i" />
+      D <input type="number" ng-model="pid.yaw.d" />
+    <br />
+    alt:
+      P <input type="number" ng-model="pid.alt.p" />
+      I <input type="number" ng-model="pid.alt.i" />
+      D <input type="number" ng-model="pid.alt.d" />
+    <br />
+    pos:
+      P <input type="number" ng-model="pid.pos.p" />
+      I <input type="number" ng-model="pid.pos.i" />
+      D <input type="number" ng-model="pid.pos.d" />
+    <br />
+    posr:
+      P <input type="number" ng-model="pid.posr.p" />
+      I <input type="number" ng-model="pid.posr.i" />
+      D <input type="number" ng-model="pid.posr.d" />
+    <br />
+    navr:
+      P <input type="number" ng-model="pid.navr.p" />
+      I <input type="number" ng-model="pid.navr.i" />
+      D <input type="number" ng-model="pid.navr.d" />
+    <br />
+    level:
+      P <input type="number" ng-model="pid.level.p" />
+      I <input type="number" ng-model="pid.level.i" />
+      D <input type="number" ng-model="pid.level.d" />
+    <br />
+    mag:
+      P <input type="number" ng-model="pid.mag.p" />
+      I <input type="number" ng-model="pid.mag.i" />
+      D <input type="number" ng-model="pid.mag.d" />
+    <br />
+    <button ng-click="setPid()">SEND</button>
+  </div>
 </div>

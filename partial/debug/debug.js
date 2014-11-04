@@ -11,7 +11,7 @@ angular.module('hk-aerial-commander').controller('DebugCtrl', function ($scope, 
     $scope.safeApply();
   });
 
-  socket.on('motor-computed', function (data) {
+  socket.on('motorComputed', function (data) {
     $scope.motorComputed = data;
     $scope.safeApply();
   });
@@ -30,5 +30,19 @@ angular.module('hk-aerial-commander').controller('DebugCtrl', function ($scope, 
     $scope.rawImu = data;
     $scope.safeApply();
   });
+
+  socket.on('pid', function (data) {
+    $scope.pid = data;
+    $scope.safeApply();
+  });
+
+  socket.on('atomicServo', function (data) {
+    $scope.atomicServo = data;
+    $scope.safeApply();
+  });
+
+  $scope.setPid = function () {
+    socket.emit('setPid', $scope.pid);
+  };
 
 });
