@@ -8,7 +8,7 @@ chai.use(require('sinon-chai'));
 sinonPromise(sinon);
 
 describe('/socketListener', function () {
-  var socketListener, multiwii, wii;
+  var socketListener, multiwii, wii, socket;
 
   beforeEach(function () {
     wii = {
@@ -27,15 +27,29 @@ describe('/socketListener', function () {
       connected: false
     };
     multiwii = {
-      list: sinon.promise().resolves(wii)
-    }
-    wii = proxyquire(process.cwd() + '/lib/wii', {
+      list: sinon.promise().resolves([wii])
+    };
+    socket = {
+      on: sinon.stub(),
+      once: sinon.stub(),
+      emit: sinon.stub()
+    };
+    var SocketListener = proxyquire(process.cwd() + '/lib/socketListener', {
       'multiwii': multiwii
-    });
-  });
-  describe('connect', function () {
-    it('calls serialport.list', function () {
+    }).SocketListener;
 
+    socketListener = new SocketListener(socket, wii);
+  });
+  describe('status', function () {
+    it('returns wii.connected', function () {
+      var listener = sinon.spy();
+
+      socket.on.withArgs('status').yield(listener);
+      expect(listener).calledOnce.calledWith(null, {connected: false});
+
+      wii.connected = true;
+      socket.on.withArgs('status').yield(listener);
+      expect(listener).calledTwice.calledWith(null, {connected: true});
     });
   });
 });
