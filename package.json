@@ -48,6 +48,7 @@
     "run-sequence": "^1.0.1",
     "serve-static": "^1.7.1",
     "sinon": "^1.11.1",
-    "sinon-chai": "^2.6.0"
+    "sinon-chai": "^2.6.0",
+    "sinon-promise": "^0.1.3"
   }
 }

@@ -12,8 +12,10 @@
   "browser": true,
   "node": true,
   "smarttabs": true,
+  "expr": true,
   "globals": {
     "angular": true,
+    "inject": true,
     "console": true,
     "$": true,
     "_": true,

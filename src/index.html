@@ -1,0 +1,55 @@
+<!doctype html>
+<html ng-app="hk-aerial-commander">
+<head>
+  <title></title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+
+  <!-- App LESS -->
+  <link href="css/app.less" type="text/css" rel="stylesheet/less">
+
+</head>
+<body>
+  <ng-include src="'partials/main/main.html'"></ng-include>
+
+  <!-- Livereload script for development only (stripped during dist build) -->
+  <script src="http://localhost:35729/livereload.js" data-build="exclude"></script>
+
+  <!-- Live parsing of less for development only (stripped during dist build) -->
+  <script src="bower_components/less/dist/less-1.7.5.js" data-build="exclude"></script>
+
+  <!-- JS from Bower components -->
+  <script src="bower_components/angular/angular.js"></script>
+
+  <!-- Main App JS -->
+  <script src="src/setup/app.js"></script>
+
+  <!-- controllers -->
+  <!-- /controllers -->
+
+  <!-- directives -->
+  <!-- /directives -->
+
+  <!-- filters -->
+  <!-- /filters -->
+
+  <!-- models -->
+  <!-- /models -->
+
+  <!-- partials -->
+  <script src="partials/main/mainCtrl.js"></script>
+  <script src="partials/header/headerCtrl.js"></script>
+  <script src="partials/connection/connectionCtrl.js"></script>
+  <!-- /partials -->
+
+  <!-- services -->
+  <script src="services/drone.js"></script>
+  <script src="services/socket.js"></script>
+  <!-- /services -->
+
+  <div ui-view>
+  </div>
+  
+</body>
+</html>
