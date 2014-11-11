@@ -35,8 +35,9 @@ describe('/services/drone', function () {
       expect(socket.emit).calledOnce.calledWith('status');
     });
     it('sets status to value in callback', function () {
-      socket.emit.withArgs('status').yield(null, {connected: true});
+      socket.emit.withArgs('status').yield({connected: true, devices: [1,2]});
       expect(drone.wiiConnected).to.be.true;
+      expect(drone.devices).to.eql([1,2]);
     });
     it('listens for disconnect', function () {
       expect(socket.once.withArgs('disconnect')).calledOnce;
@@ -82,13 +83,114 @@ describe('/services/drone', function () {
         socket.once.withArgs('disconnect').yield();
       });
     });
-  });
-  describe('events', function () {
-    it('sets default values', function () {
-      expect(drone.rc).to.eql({roll: 0, pitch: 0, yaw: 0, throttle: 0});
-    });
-    it('updates and emits status on `rc`', function () {
-
+    describe('events', function () {
+      var listener;
+      beforeEach(function () {
+        listener = sinon.spy();
+      });
+      it('sets default values', function () {
+        expect(drone.rc).to.eql({roll: 0, pitch: 0, yaw: 0, throttle: 0});
+        expect(drone.motors).to.eql({front: 0, left: 0, right: 0, servos: 0});
+        expect(drone.attitude).to.eql({roll: 0, pitch: 0, heading: 0});
+        expect(drone.accelerometers).to.eql({acc: {roll: 0, pitch: 0, z: 0}, gyro: {roll: 0, pitch: 0, yaw: 0}});
+        expect(drone.pid).to.eql({
+          roll: {p: 0, i: 0, d: 0},
+          pitch: {p: 0, i: 0, d: 0},
+          yaw: {p: 0, i: 0, d: 0},
+          alt: {p: 0, i: 0, d: 0},
+          pos: {p: 0, i: 0, d: 0},
+          posr: {p: 0, i: 0, d: 0},
+          navr: {p: 0, i: 0, d: 0},
+          level: {p: 0, i: 0, d: 0},
+          mag: {p: 0, i: 0, d: 0}
+        });
+      });
+      it('updates and emits status on `rc`', function () {
+        drone.on('rc', listener);
+        socket.on.withArgs('rc').yield({roll: 1500, pitch: 1050, yaw: 1950, throttle: 1850});
+        expect(drone.rc).to.eql({
+          roll: 0,
+          pitch: -1,
+          yaw: 1,
+          throttle: 1
+        });
+        expect(listener).calledOnce;
+      });
+      it('updates and emits status on `motor`', function () {
+        drone.on('motors', listener);
+        socket.on.withArgs('motor').yield([1500, 1050, 1850, 0, 0, 0, 0, 0]);
+        expect(drone.motors).to.eql({
+          front: 0.5,
+          left: 0,
+          right: 1,
+          servos: 0
+        });
+        expect(listener).calledOnce;
+      });
+      it('updates and emits status on `servo`', function () {
+        drone.on('motors', listener);
+        socket.on.withArgs('servo').yield([0, 0, 0, 0, 0, 1500, 0, 0]);
+        expect(drone.motors).to.eql({
+          front: 0,
+          left: 0,
+          right: 0,
+          servos: 0.5
+        });
+        expect(listener).calledOnce;
+      });
+      it('updates and emits status on `attitude`', function () {
+        drone.on('attitude', listener);
+        socket.on.withArgs('attitude').yield({angles: [191, 62], heading: 25});
+        expect(drone.attitude).to.eql({
+          roll: 191,
+          pitch: 62,
+          heading: 25
+        });
+        expect(listener).calledOnce;
+      });
+      it('updates and emits status on `rawImu`', function () {
+        drone.on('accelerometers', listener);
+        socket.on.withArgs('rawImu').yield({accSmooth: [-315, 112, 418], gyroData: [294, -164, 303]});
+        expect(drone.accelerometers).to.eql({
+          acc: {
+            roll: -315,
+            pitch: 112,
+            z: 418
+          },
+          gyro: {
+            roll: 294,
+            pitch: -164,
+            yaw: 303
+          }
+        });
+        expect(listener).calledOnce;
+      });
+      it('updates and emits status on `pid`', function () {
+        drone.on('pid', listener);
+        socket.on.withArgs('pid').yield({
+          roll: {p: 1, i: 2, d: 3},
+          pitch: {p: 4, i: 5, d: 6},
+          yaw: {p: 7, i: 8, d: 9},
+          alt: {p: 10, i: 11, d: 12},
+          pos: {p: 13, i: 14, d: 15},
+          posr: {p: 16, i: 17, d: 18},
+          navr: {p: 19, i: 20, d: 21},
+          level: {p: 22, i: 23, d: 24},
+          mag: {p: 25, i: 26, d: 27}
+        });
+        expect(drone.pid).to.eql({
+          roll: {p: 1, i: 2, d: 3},
+          pitch: {p: 4, i: 5, d: 6},
+          yaw: {p: 7, i: 8, d: 9},
+          alt: {p: 10, i: 11, d: 12},
+          pos: {p: 13, i: 14, d: 15},
+          posr: {p: 16, i: 17, d: 18},
+          navr: {p: 19, i: 20, d: 21},
+          level: {p: 22, i: 23, d: 24},
+          mag: {p: 25, i: 26, d: 27}
+        });
+        expect(listener).calledOnce;
+      });
     });
   });
 });

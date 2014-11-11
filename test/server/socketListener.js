@@ -8,7 +8,7 @@ chai.use(require('sinon-chai'));
 sinonPromise(sinon);
 
 describe('/socketListener', function () {
-  var socketListener, multiwii, wii, socket;
+  var socketListener, multiwii, wii, socket, devices;
 
   beforeEach(function () {
     wii = {
@@ -26,8 +26,9 @@ describe('/socketListener', function () {
       dispose: sinon.stub(),
       connected: false
     };
+    devices = [{comName: "/dev/cu.usbmodem1411", manufacturer: "Arduino LLC"}];
     multiwii = {
-      list: sinon.promise().resolves([wii])
+      list: sinon.promise().resolves(devices)
     };
     socket = {
       on: sinon.stub(),
@@ -41,15 +42,23 @@ describe('/socketListener', function () {
     socketListener = new SocketListener(socket, wii);
   });
   describe('status', function () {
-    it('returns wii.connected', function () {
+    it('returns wii.connected and devices list', function () {
       var listener = sinon.spy();
 
       socket.on.withArgs('status').yield(listener);
-      expect(listener).calledOnce.calledWith(null, {connected: false});
+      expect(multiwii.list).calledOnce;
+      expect(listener).calledOnce.calledWith({
+        connected: false,
+        devices: devices
+      });
 
       wii.connected = true;
       socket.on.withArgs('status').yield(listener);
-      expect(listener).calledTwice.calledWith(null, {connected: true});
+      expect(multiwii.list).calledTwice;
+      expect(listener).calledTwice.calledWith({
+        connected: true,
+        devices: devices
+      });
     });
   });
 });
