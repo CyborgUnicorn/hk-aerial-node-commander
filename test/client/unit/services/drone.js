@@ -6,6 +6,7 @@ describe('/services/drone', function () {
     socket = {
       on: sinon.stub(),
       once: sinon.stub(),
+      off: sinon.stub(),
       emit: sinon.stub()
     };
     module('hk-aerial-commander', function ($provide) {
@@ -16,31 +17,45 @@ describe('/services/drone', function () {
     });
   });
   it('sets socketConnected to false', function () {
-    expect(drone.socketConnected).to.be.false;
+    expect(drone.status.socketConnected).to.be.false;
   });
-  it('sets wiiConnected to false', function () {
-    expect(drone.wiiConnected).to.be.false;
+  it('sets droneConnected to false', function () {
+    expect(drone.status.droneConnected).to.be.false;
   });
   it('listens for connect event', function () {
     expect(socket.on).calledOnce.calledWith('connect');
+  });
+  it('sets default status values', function () {
+    expect(drone.status).to.eql({
+      socketConnected: false,
+      droneConnected: false,
+      devices: []
+    });
   });
   describe('on connect', function () {
     beforeEach(function () {
       socket.on.withArgs('connect').yield();
     });
     it('sets socketConnected to true', function () {
-      expect(drone.socketConnected).to.be.true;
+      expect(drone.status.socketConnected).to.be.true;
     });
-    it('emits status', function () {
+    it('emits `status` on socket', function () {
       expect(socket.emit).calledOnce.calledWith('status');
     });
     it('sets status to value in callback', function () {
       socket.emit.withArgs('status').yield({connected: true, devices: [1,2]});
-      expect(drone.wiiConnected).to.be.true;
-      expect(drone.devices).to.eql([1,2]);
+      expect(drone.status.droneConnected).to.be.true;
+      expect(drone.status.devices).to.eql([1,2]);
     });
     it('listens for disconnect', function () {
       expect(socket.once.withArgs('disconnect')).calledOnce;
+    });
+    it('updates and emits status on disconnect', function () {
+      var listener = sinon.spy();
+      drone.on('status', listener);
+      socket.once.withArgs('disconnect').yield();
+      expect(listener).calledOnce.calledWith(drone.status);
+      expect(drone.status.socketConnected).to.be.false;
     });
     describe('arm', function () {
       it('emits arm', function () {

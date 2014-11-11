@@ -2,8 +2,11 @@ angular.module('hk-aerial-commander').service('drone', function (socket) {
 
   function Drone() {
     EventEmitter2.call(this);
-    this.socketConnected = false;
-    this.wiiConnected = false;
+    this.status = {
+      socketConnected: false,
+      droneConnected: false,
+      devices: []
+    };
 
     this.rc = {roll: 0, pitch: 0, yaw: 0, throttle: 0};
     this.motors = {front: 0, left: 0, right: 0, servos: 0};
@@ -58,12 +61,13 @@ angular.module('hk-aerial-commander').service('drone', function (socket) {
   };
 
   Drone.prototype.onStatus = function (status) {
-    this.wiiConnected = status.connected;
-    this.devices = status.devices;
+    this.status.droneConnected = status.connected;
+    this.status.devices = status.devices;
+    this.emit('status', this.status);
   };
 
   Drone.prototype.onSocketConnect = function () {
-    this.socketConnected = true;
+    this.status.socketConnected = true;
     socket.once('disconnect', this.onSocketDisconnect);
     socket.on('rc', this.onRc);
     socket.on('motor', this.onMotor);
@@ -77,14 +81,14 @@ angular.module('hk-aerial-commander').service('drone', function (socket) {
   };
 
   Drone.prototype.onSocketDisconnect = function () {
-    this.socketConnected = false;
+    this.status.socketConnected = false;
     socket.off('rc', this.onRc);
     socket.off('motor', this.onMotor);
     socket.off('servo', this.onServo);
     socket.off('attitude', this.onAttitude);
     socket.off('rawImu', this.onImu);
     socket.off('pid', this.onPid);
-    this.emit('status', this);
+    this.emit('status', this.status);
     return this;
   };
 

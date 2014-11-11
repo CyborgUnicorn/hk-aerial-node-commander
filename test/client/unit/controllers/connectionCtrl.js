@@ -1,17 +1,23 @@
 describe('/partials/connection/ConnectionCtrl', function () {
 
-  var scope, ctrl;
+  var scope, ctrl, drone;
 
   beforeEach(function () {
     module('hk-aerial-commander');
     inject(function ($rootScope, $controller) {
       scope = $rootScope.$new();
-      ctrl = $controller('ConnectionCtrl', {$scope: scope});
+      drone = {
+        on: sinon.stub()
+      };
+      ctrl = $controller('ConnectionCtrl', {
+        $scope: scope,
+        drone: drone
+      });
     });
   });
 
-  xit('should have tests', function () {
-    
+  it('listens for drone status', function () {
+    expect(drone.on).calledOnce.calledWith('status');
   });
 
 });
