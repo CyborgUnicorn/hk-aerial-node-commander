@@ -52,7 +52,7 @@ describe('/socketListener', function () {
         devices: devices
       });
 
-      wii.connected = true;
+      wii.port = true;
       socket.on.withArgs('status').yield(listener);
       expect(multiwii.list).calledTwice;
       expect(listener).calledTwice.calledWith({

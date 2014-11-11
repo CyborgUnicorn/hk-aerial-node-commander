@@ -204,8 +204,21 @@ describe('/services/drone', function () {
           level: {p: 22, i: 23, d: 24},
           mag: {p: 25, i: 26, d: 27}
         });
-        expect(listener).calledOnce;
+        expect(listener).called;
       });
+    });
+  });
+  describe('getStatus', function () {
+    it('emits a `status` event on the socket', function () {
+      drone.getStatus();
+      expect(socket.emit.withArgs('status')).calledOnce;
+    });
+  });
+  describe('connect', function () {
+    it('emits a `connect` event on the socket with the passed in device', function () {
+      var device = {};
+      drone.connect(device);
+      expect(socket.emit.withArgs('connect', device)).calledOnce;
     });
   });
 });

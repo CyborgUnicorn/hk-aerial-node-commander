@@ -13,6 +13,6 @@ gulp.task('build', require('./build/build'));
 
 gulp.task('watch', require('./build/watch'));
 
-gulp.task('serve', require('./build/serve'));
+gulp.task('serve', require('./lib/server'));
 
 gulp.task('default', ['test:client', 'test:server', 'serve', 'watch']);

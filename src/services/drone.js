@@ -1,5 +1,7 @@
 angular.module('hk-aerial-commander').service('drone', function (socket) {
 
+  function noop() {}
+
   function Drone() {
     EventEmitter2.call(this);
     this.status = {
@@ -32,7 +34,8 @@ angular.module('hk-aerial-commander').service('drone', function (socket) {
   Drone.prototype = Object.create(EventEmitter2.prototype);
   Drone.prototype.constructor = Drone;
 
-  Drone.prototype.connect = function () {
+  Drone.prototype.connect = function (device) {
+    socket.emit('connect', device, this.onWiiConnect);
     return this;
   };
 
@@ -52,6 +55,11 @@ angular.module('hk-aerial-commander').service('drone', function (socket) {
     socket.emit('setAccCalibration', callback);
   };
 
+  Drone.prototype.getStatus = function(callback) {
+    callback = callback || noop;
+    socket.emit('status', callback);
+  };
+
   Drone.prototype.setRc = function(roll, pitch, yaw, throttle, callback) {
     roll = 1500 + roll * 450;
     pitch = 1500 + pitch * 450;
@@ -61,7 +69,7 @@ angular.module('hk-aerial-commander').service('drone', function (socket) {
   };
 
   Drone.prototype.onStatus = function (status) {
-    this.status.droneConnected = status.connected;
+    this.status.droneConnected = status.connected || false;
     this.status.devices = status.devices;
     this.emit('status', this.status);
   };
@@ -74,6 +82,7 @@ angular.module('hk-aerial-commander').service('drone', function (socket) {
     socket.on('servo', this.onServo);
     socket.on('attitude', this.onAttitude);
     socket.on('rawImu', this.onImu);
+    socket.on('pid', this.onPid);
     socket.on('pid', this.onPid);
 
     socket.emit('status', this.onStatus);
@@ -135,6 +144,7 @@ angular.module('hk-aerial-commander').service('drone', function (socket) {
   };
 
   Drone.prototype.onWiiConnect = function () {
+    socket.emit('status', this.onStatus);
     return this;
   };
 

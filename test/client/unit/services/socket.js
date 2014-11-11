@@ -5,6 +5,8 @@ describe('/services/socket', function () {
   beforeEach(function () {
     socket = {
       on: sinon.stub(),
+      once: sinon.stub(),
+      removeListener: sinon.stub(),
       emit: sinon.stub()
     };
     window.io = {

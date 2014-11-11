@@ -1,3 +1,7 @@
-<div ng-controller="ConnectionCtrl">
-
+<div ng-controller="ConnectionCtrl as ctrl">
+  <div>Socket connected: {{status.socketConnected}}</div>
+  <div>Drone connected: {{status.droneConnected}}</div>
+  <div>Available devices: <select ng-model="device" ng-options="device.comName for device in status.devices"></select>
+  <div><button ng-click="ctrl.getStatus()" ng-disabled="!status.socketConnected">Refresh</button></div>
+  <div><button ng-click="ctrl.connect()" ng-disabled="!device">Connect</button></div>
 </div>
