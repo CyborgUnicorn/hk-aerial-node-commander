@@ -1,4 +1,5 @@
 <div ng-controller="ConnectionCtrl as ctrl">
+  <h2>Connection</h2>
   <div>Socket connected: {{status.socketConnected}}</div>
   <div>Drone connected: {{status.droneConnected}}</div>
   <div>Available devices: <select ng-model="device" ng-options="device.comName for device in status.devices"></select>

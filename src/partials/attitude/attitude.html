@@ -1,0 +1,21 @@
+<div ng-controller="AttitudeCtrl as ctrl">
+  <h2>Attitude</h2>
+  <div>
+    <h4>Attitude</h4>
+    <div>Roll: {{attitude.roll}}</div>
+    <div>Pitch: {{attitude.pitch}}</div>
+    <div>Heading: {{attitude.heading}}</div>
+  </div>
+  <div>
+    <h4>Accelerometer</h4>
+    <div>Roll: {{accelerometers.acc.roll}}</div>
+    <div>Pitch: {{accelerometers.acc.pitch}}</div>
+    <div>Z: {{accelerometers.acc.z}}</div>
+  </div>
+  <div>
+    <h4>Gyro</h4>
+    <div>Roll: {{accelerometers.gyro.roll}}</div>
+    <div>Pitch: {{accelerometers.gyro.pitch}}</div>
+    <div>Yaw: {{accelerometers.gyro.yaw}}</div>
+  </div>
+</div>
