@@ -13,7 +13,7 @@ angular.module('hk-aerial-commander').service('drone', function (socket) {
     this.rc = {roll: 0, pitch: 0, yaw: 0, throttle: 0};
     this.motors = {front: 0, left: 0, right: 0, servos: 0};
     this.attitude = {roll: 0, pitch: 0, heading: 0};
-    this.accelerometers = {acc: {roll: 0, pitch: 0, z: 0}, gyro: {roll: 0, pitch: 0, yaw: 0}};
+    this.accelerometers = {acc: {roll: 0, pitch: 0, z: 0}, gyro: {roll: 0, pitch: 0, yaw: 0}, mag: {roll: 0, pitch: 0, yaw: 0}};
     this.pid = {
       roll: {p: 0, i: 0, d: 0},
       pitch: {p: 0, i: 0, d: 0},
@@ -132,9 +132,15 @@ angular.module('hk-aerial-commander').service('drone', function (socket) {
     this.accelerometers.acc.roll = imu.accSmooth[0];
     this.accelerometers.acc.pitch = imu.accSmooth[1];
     this.accelerometers.acc.z = imu.accSmooth[2];
+
     this.accelerometers.gyro.roll = imu.gyroData[0];
     this.accelerometers.gyro.pitch = imu.gyroData[1];
     this.accelerometers.gyro.yaw = imu.gyroData[2];
+
+    this.accelerometers.mag.roll = imu.magADC[0];
+    this.accelerometers.mag.pitch = imu.magADC[1];
+    this.accelerometers.mag.yaw = imu.magADC[2];
+
     this.emit('accelerometers', this.accelerometers);
   };
 

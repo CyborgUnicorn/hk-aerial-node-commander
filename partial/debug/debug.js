@@ -41,6 +41,11 @@ angular.module('hk-aerial-commander').controller('DebugCtrl', function ($scope, 
     $scope.safeApply();
   });
 
+  socket.on('range', function (data) {
+    $scope.range = 2.54*data/2 - 15.24;
+    $scope.safeApply();
+  });
+
   $scope.setPid = function () {
     socket.emit('setPid', $scope.pid);
   };

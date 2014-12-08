@@ -22,6 +22,7 @@
     "moment": true,
     "io": true,
     "EventEmitter2": true,
+    "THREE": true,
 
     "describe": true,
     "xdescribe": true,
