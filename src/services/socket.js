@@ -1,5 +1,5 @@
 angular.module('hk-aerial-commander').service('socket', function () {
-  var socket = io.connect('http://localhost');
+  var socket = io.connect();
 
   return {
     on: socket.on.bind(socket),

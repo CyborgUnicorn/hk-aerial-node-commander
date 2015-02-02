@@ -2,7 +2,7 @@ var connect = require('connect'),
   http = require('http'),
   multiwii = require('multiwii'),
   Wii = multiwii.Wii,
-  socketlistener = require('./lib/socketlistener'),
+  socketlistener = require('./lib/socketListener'),
   dualShockListener = require('./lib/dualShockListener');
 
 var app = connect()

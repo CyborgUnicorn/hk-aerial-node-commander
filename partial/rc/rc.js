@@ -81,7 +81,7 @@ angular.module('hk-aerial-commander').controller('RcCtrl', function ($scope, soc
     }
   };
 
-  //setInterval($scope.send, 50);
+  setInterval($scope.send, 50);
 
-  //$scope.send();
+  $scope.send();
 });
