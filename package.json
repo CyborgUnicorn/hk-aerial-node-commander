@@ -20,7 +20,7 @@
     "dualshock-controller": "^0.6.7",
     "multiwii": "~0.0.9",
     "q": "^1.0.1",
-    "socket.io": "~0.9.16"
+    "socket.io": "~1.0.4"
   },
   "devDependencies": {
     "angular-generator": "0.0.4",
